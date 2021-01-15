@@ -6,6 +6,7 @@ This library was developed during the discipline of "Algorithms and Data Structu
 To test this library, just make a clone of this repo using the command below:
 
 > git clone https://github.com/NanderSantos/My-SearchMachine.git
+
 > cd search-machine
 
 Then, just run the following command to allow the build.sh file to run:
