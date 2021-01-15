@@ -19,7 +19,7 @@ Finally run this command and everything will be done:
 
 Or use this magical one-liner command to make it easiest:
 
-> git clone https://github.com/NanderSantos/My-SearchMachine.git && cd search-machine && chmod +x build.sh && ./build.sh
+> git clone https://github.com/NanderSantos/My-SearchMachine.git && cd My-SearchMachine && chmod +x build.sh && ./build.sh
 
 ## Run
 
