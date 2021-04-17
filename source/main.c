@@ -15,43 +15,51 @@
 */
 
 //Declaração das Funções
-void main(int argc, char const*[]);
-void Indexador(FILE*, Hash*, char[][40], int);
-void Processador(Hash*, char**, int);
+int main(int argc, char const*[]);
+void Indexador(FILE *, Hash *, char[][40], int);
+void Processador(Hash *, char **, int);
 //-------------------------------------------------------------------------------------
 
-void main(int argc, char const *argv[]) {
+int main(int argc, char const * argv[]) {
 
      int tmh_stopword, num_pesquisa;
-     FILE *stopwords;
-     FILE *consulta;
-     FILE *inverted_list;
+     FILE * stopwords;
+     FILE * search;
+     FILE * inverted_list = NULL;
 
-     stopwords = fopen (argv[2],"r");
-     if (stopwords!=NULL)
-     {
+     stopwords = fopen ("files/stopword_file.txt","r");
+     
+     if (stopwords!=NULL) {
+
           tmh_stopword = TamanhoArquivo(stopwords);
           char stpwds[tmh_stopword][40];
           int i = 0;
 
           fseek(stopwords, 0, SEEK_SET);
+          
           while (!feof(stopwords)) {
 
                fscanf(stopwords,"%s ", stpwds[i]);
                i++;
           }
+
           fclose (stopwords);
+
+		  printf("Indexing corpus...\n");
 
           Hash hash;
           Indexador(inverted_list, &hash, stpwds, tmh_stopword);
-          printf("Colisões: %lu\n", hash.colisoes);
+		  
+		  printf("Done!\n");
+          printf("Collisions: %lu\n", hash.colisoes);
 
-          consulta = fopen (argv[1],"r");
-          if (consulta!=NULL)
-          {
+          search = fopen (argv[1],"r");
+
+          if (search!=NULL) {
+
                num_pesquisa = tmh_stopword;
                char **pesquisa;
-               pesquisa = LeArquivo(consulta, stpwds, &num_pesquisa);
+               pesquisa = LeArquivo(search, stpwds, &num_pesquisa);
 
                clock_t tempo;
                tempo = clock();
@@ -60,20 +68,21 @@ void main(int argc, char const *argv[]) {
 
                tempo = clock() - tempo;
                double time_taken = ((double) tempo) / CLOCKS_PER_SEC;
-               printf("Pesquisa demorou %f segundos para execução\n", time_taken);
+               printf("Search took %f seconds \n", time_taken);
 
-               fclose (consulta);
+               fclose (search);
 
-          }else printf("ERRO AO ABRIR ARQUIVO DE CONSULTA\n");
-     } else printf("ERRO AO ABRIR ARQUIVO DE STOPWORDS\n");
+          } else printf("Error on openning 'search.txt' file!\n");
 
-     return ;
+     } else printf("Error on openning 'files/stopword_file.txt' file!\n");
+
+     return 0;
 }
 
 
 void Indexador(FILE *inverted_list, Hash *hash, char stpwds[][40], int tmh_stopword){
 
-     inverted_list = fopen("corpus/inverted_list.txt", "w");
+     inverted_list = fopen("files/inverted_list.txt", "w");
      CriaHash(hash);
 
      int aux=0;
@@ -88,10 +97,11 @@ void Indexador(FILE *inverted_list, Hash *hash, char stpwds[][40], int tmh_stopw
           FILE *arquivo;
           arquivo = fopen (string,"r");
 
-          if (arquivo!=NULL)
-          {
+          if (arquivo!=NULL) {
+
                IndexaArquivo(arquivo, stpwds, hash, i, tmh_stopword);
                fclose (arquivo);
+          
           } else aux = 1;
      }
 
@@ -105,7 +115,9 @@ void Indexador(FILE *inverted_list, Hash *hash, char stpwds[][40], int tmh_stopw
 void Processador(Hash *hash, char **consulta, int num_pesquisa){
 
      for (int i = 0; i < num_pesquisa; i++) {
+
           PesquisaHash(hash, consulta[i]);
      }
+
      return ;
 }
