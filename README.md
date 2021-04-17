@@ -4,6 +4,10 @@ This library was developed during the discipline of "Algorithms and Data Structu
 
 The file "search.txt" must contain a phrase or as words to be searched in the database. The file "files/stopword_file.txt" contains a list of words that should be disregarded when searching.
 
+<p align="center">
+  <img src="resources/gif.gif">
+</p>
+
 ## Install
 
 To test this library, just make a clone of this repo using the command below:
