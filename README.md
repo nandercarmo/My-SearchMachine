@@ -27,3 +27,9 @@ To run the program just use the following command line below:
 > ./MySearch search.txt
 
 To see the results of other searches, just change the input words in the search.txt file
+
+## Clear
+
+To clear the project just use the following command line below:
+
+> make clean
