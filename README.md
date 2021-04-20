@@ -10,7 +10,7 @@ The file **"search.txt"** must contain a phrase or as words to be searched in th
 
 ---
 
-##	📩	Install
+##	📦	Install
 
 To test this library, just make a clone of this repo and build using the commands below:
 
