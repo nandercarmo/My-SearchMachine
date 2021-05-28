@@ -26,7 +26,7 @@ To test this library, just make a clone of this repo and build using the command
 ```bash
 $ git clone https://github.com/NanderSantos/My-SearchMachine.git
 
-$ cd search-machine
+$ cd My-SearchMachine
 
 $ make
 ```
